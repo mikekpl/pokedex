@@ -4,9 +4,17 @@
 
 A Pokémon list project that exhibits the next generation way for us to build our multi-module Android Applications using Jetpack Compose, Hilt, Clean Architecture, Kotlin Flow and more...
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/mike14u/pokedex/main/images/showcase.png" />
+</p>
+
 ## Overview
 
 This project will be helpful for many things both Pokémon and Tech, building with Jetpack Compose
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/mike14u/pokedex/main/images/gif.gif" />
+</p>
 
 ### Pokédex Features
 * **List of Pokémon:** #1010 as of the moment since the 5 others are newly released no further info is provided
@@ -16,15 +24,20 @@ This project will be helpful for many things both Pokémon and Tech, building wi
 * **Android OS Support:** Supports Android Phones starting Nougat (Android 7.0 API Level 24) onwards
 
 ### Tech Features
+<p align="center">
+<img src="https://raw.githubusercontent.com/mike14u/pokedex/main/images/directory.png" />
+</p>
+
 * **Multi-module:** App is multi-module ready to better isolate feature and layer modules that can be handled by big teams. Better way to reuse certain feature and spend less on build times as well
 * **Clean Architecture:** Uses modern android way of building using Clean Architecture
 
-<center>
+<p align="center">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPxJYFYDDFI8-kdeuQrCEkocLizXyUhbsTyQ" width="400"/>
 <img src="https://developer.android.com/static/topic/libraries/architecture/images/mad-arch-overview.png" width="400"/>
-
+</p>
+<p align="center">
 Each feature module is built with a sub-module that follows Domain, Data and UI
-</center>
+</p>
 
 * **Navigation Across Multi-module Features:** Access different features from different module using composables
 * **Navigation Compose Deeplinks:** Shows an example on how to achieve deeplinks, parameterized deeplinks in Navigation Compose
@@ -48,9 +61,9 @@ This project is built using next generation tools supported by the latest Canary
 
 ## Credits
 
-<center>
+<p align="center">
 <img src="https://cdn.dribbble.com/users/1767024/screenshots/16833947/media/c9ba6952aa78a2e8365a9c03c1feec41.jpg?resize=1000x750&vertical=center" />
-</center>
+</p>
 
 * Artwork and UI mockup reference: [https://dribbble.com/shots/16833947-Mobile-Pokedex-App-Design-Exploration](https://dribbble.com/shots/16833947-Mobile-Pokedex-App-Design-Exploration)
 * API and Splashscreen Icon: [https://pokeapi.co/](https://pokeapi.co/)
