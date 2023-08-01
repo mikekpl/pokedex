@@ -23,22 +23,14 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Bundle 'release' with Gradle
-      run: ./gradlew bundleRelease
-    - name: Sign AAB
-      id: sign_aab
-      uses: r0adkll/sign-android-release@v1
-      with:
-        releaseDirectory: app/build/outputs/bundle/release
-        signingKeyBase64: ${{ secrets.KEYSTORE }}
-        alias: ${{ secrets.SIGNING_ALIAS }}
-        keyStorePassword: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
-        keyPassword: ${{ secrets.SIGNING_ALIAS_PASSWORD }}  
+      id: build_app
+      run: ./gradlew assembleRelease -Pandroid.injected.signing.store.file=${{ secrets.KEYSTORE }} -Pandroid.injected.signing.store.password=secrets.SIGNING_KEYSTORE_PASSWORD -Pandroid.injected.signing.key.alias=${{ secrets.SIGNING_ALIAS }} -Pandroid.injected.signing.key.password=${{ secrets.SIGNING_ALIAS_PASSWORD }}
     - run: echo "Build status report=${{ job.status }}."
     - name: Upload App Bundle
       uses: actions/upload-artifact@v1
       with:
         name: aab
-        path: ${{steps.sign_aab.outputs.signedReleaseFile}}
+        path: ${{steps.build_app.outputs.signedReleaseFile}}
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
