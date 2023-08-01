@@ -12,9 +12,7 @@ A Pokémon list project that exhibits the next generation way for us to build ou
 
 This project will be helpful for many things both Pokémon and Tech, building with Jetpack Compose
 
-<p align="center">
-<img src="https://raw.githubusercontent.com/mike14u/pokedex/main/images/gif.gif" />
-</p>
+<img src="https://raw.githubusercontent.com/mike14u/pokedex/main/images/gif.gif" height="800" />
 
 ### Pokédex Features
 * **List of Pokémon:** #1010 as of the moment since the 5 others are newly released no further info is provided
@@ -24,9 +22,7 @@ This project will be helpful for many things both Pokémon and Tech, building wi
 * **Android OS Support:** Supports Android Phones starting Nougat (Android 7.0 API Level 24) onwards
 
 ### Tech Features
-<p align="center">
 <img src="https://raw.githubusercontent.com/mike14u/pokedex/main/images/directory.png" />
-</p>
 
 * **Multi-module:** App is multi-module ready to better isolate feature and layer modules that can be handled by big teams. Better way to reuse certain feature and spend less on build times as well
 * **Clean Architecture:** Uses modern android way of building using Clean Architecture
