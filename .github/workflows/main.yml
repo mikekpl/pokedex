@@ -13,12 +13,6 @@ jobs:
     name: Generate App APK
     runs-on: ubuntu-latest
     steps:
-    - name: Decode Keystore
-      id: decode_keystore
-      uses: timheuer/base64-to-file@v1
-      with:
-        fileName: 'keystore.jks'
-        encodedString: ${{ secrets.SIGNING_KEYSTORE }}
     - uses: actions/checkout@v3
     - name: set up JDK 17
       uses: actions/setup-java@v3
@@ -35,6 +29,7 @@ jobs:
       uses: r0adkll/sign-android-release@v1
       with:
         releaseDirectory: app/build/outputs/bundle/release
+        signingKeyBase64: ${{ secrets.KEYSTORE }}
         alias: ${{ secrets.SIGNING_ALIAS }}
         keyStorePassword: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
         keyPassword: ${{ secrets.SIGNING_ALIAS_PASSWORD }}  
