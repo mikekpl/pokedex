@@ -1,52 +1,55 @@
 name: main
-
-on:
- push:
-   branches:
-     - main
-   tags:
-     - "v*"
- workflow_dispatch:
-
+'on':
+  push:
+    branches:
+      - main
+    tags:
+      - v*
 jobs:
-  build:
-    name: Generate App APK
+  apk:
+    name: Generate APK
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: gradle
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Bundle 'release' with Gradle
-      id: build_app
-      run: ./gradlew assembleRelease -Pandroid.injected.signing.store.file=${{ secrets.KEYSTORE }} -Pandroid.injected.signing.store.password=secrets.SIGNING_KEYSTORE_PASSWORD -Pandroid.injected.signing.key.alias=${{ secrets.SIGNING_ALIAS }} -Pandroid.injected.signing.key.password=${{ secrets.SIGNING_ALIAS_PASSWORD }}
-    - run: echo "Build status report=${{ job.status }}."
-    - name: Upload App Bundle
-      uses: actions/upload-artifact@v1
-      with:
-        name: aab
-        path: ${{steps.build_app.outputs.signedReleaseFile}}
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: Tag Name
-        release_name: Release Name
-    - name: Upload Release AAB
-      id: upload_release_asset
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: aab/app-release.aab
-          asset_name: ${{ github.event.repository.name }}.aab
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+      - name: Setup JDK
+        uses: actions/setup-java@v2.5.0
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Set execution flag for gradlew
+        run: chmod +x gradlew
+      - name: Build APK
+        run: bash ./gradlew assembleDebug --stacktrace
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+  release:
+    name: Release APK
+    needs: apk
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download APK from build
+        uses: actions/download-artifact@v1
+        with:
+          name: apk
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+        with:
+          tag_name: '${{ github.run_number }}'
+          release_name: '${{ github.event.repository.name }} v${{ github.run_number }}'
+      - name: Upload Release APK
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+        with:
+          upload_url: '${{ steps.create_release.outputs.upload_url }}'
+          asset_path: apk/app-debug.apk
+          asset_name: '${{ github.event.repository.name }}.apk'
           asset_content_type: application/zip
-    - run: echo "Upload returned with status=${{ job.status }}."
