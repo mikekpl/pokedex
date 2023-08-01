@@ -20,7 +20,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: gradle
-    - name: run: chmod +x gradlew
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
     - name: Bundle 'release' with Gradle
       run: ./gradlew bundleRelease
     - name: Sign AAB
@@ -39,21 +40,21 @@ jobs:
         name: aab
         path: ${{steps.sign_aab.outputs.signedReleaseFile}}
     - name: Create Release
-       id: create_release
-       uses: actions/create-release@v1
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       with:
-         tag_name: Tag Name
-         release_name: Release Name
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: Tag Name
+          release_name: Release Name
      - name: Upload Release AAB
        id: upload_release_asset
        uses: actions/upload-release-asset@v1.0.1
        env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        with:
-         upload_url: ${{ steps.create_release.outputs.upload_url }}
-         asset_path: aab/app-release.aab
-         asset_name: ${{ github.event.repository.name }}.aab
-         asset_content_type: application/zip
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: aab/app-release.aab
+          asset_name: ${{ github.event.repository.name }}.aab
+          asset_content_type: application/zip
      - run: echo "Upload returned with status=${{ job.status }}."
