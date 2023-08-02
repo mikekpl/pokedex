@@ -29,7 +29,7 @@ This project will be helpful for many things both Pokémon and Tech, building wi
 
 <p align="center">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPxJYFYDDFI8-kdeuQrCEkocLizXyUhbsTyQ" width="400"/>
-<img src="https://developer.android.com/static/topic/libraries/architecture/images/mad-arch-overview.png" width="400"/>
+<img src="https://miro.medium.com/v2/resize:fit:1400/1*vcnYWWn_zhNk6I30meBaPg.png" width="400"/>
 </p>
 <p align="center">
 Each feature module is built with a sub-module that follows Domain, Data and UI
