@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.mikelau.feature.pokemon.ui"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
