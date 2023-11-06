@@ -1,6 +1,4 @@
 # Pokédex using Jetpack Compose
-[![Android Arsenal](https://img.shields.io/badge/X-mike14u-blue.svg)](https://www.x.com/mike14u)
-[![Android Arsenal](https://img.shields.io/badge/Github-mike14u-ff69b4.svg)](https://github.com/mike14u)
 
 A Pokémon list project that exhibits the next generation way for us to build our multi-module Android Applications using Jetpack Compose, Hilt, Clean Architecture, Kotlin Flow and more...
 
@@ -51,7 +49,7 @@ Each feature module is built with a sub-module that follows Domain, Data and UI
 
 ## Built With
 
-This project is built using next generation tools supported by the latest Canary version of **Android Studio Iguana | 2023.2.1 Canary 6:**. It is very important that your Kotlin, K2 Compiler, Jetpack Compose Compiler and Hilt versions aligned. In this case I used **(Kotlin 1.9.0, Jetpack Compose Compiler 1.5.0, Hilt 2.47)**
+This project is built using next generation tools supported by the latest Canary version of **Android Studio Iguana | 2023.2.1 Canary 12:**. It is very important that your Kotlin, K2 Compiler, Jetpack Compose Compiler and Hilt versions aligned. In this case I used **(Kotlin 1.9.0, Jetpack Compose Compiler 1.5.0, Hilt 2.47+)**
 
 * **Android Studio Iguana:** IDE used
 * **Kotlin:** Programming Language
