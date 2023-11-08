@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hilt)
-    id(libs.plugins.kotlinKapt.get().pluginId)
+    alias(libs.plugins.kotlinKsp)
 }
 
 android {
@@ -71,7 +71,7 @@ dependencies {
 
     implementation(libs.hilt.navigation.compose)
     implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)

@@ -1,6 +1,7 @@
 [versions]
 agp = "8.3.0-alpha12"
 kotlin = "1.9.0"
+kotlinKsp = "1.9.0-1.0.13"
 core-ktx = "1.12.0"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.1.5"
@@ -58,6 +59,6 @@ accompanist-systemuicontroller = { group = "com.google.accompanist", name = "acc
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-kotlinKapt = { id = "kotlin-kapt", version.ref = "kotlin"}
+kotlinKsp = { id = "com.google.devtools.ksp", version.ref = "kotlinKsp" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-plugin-serialization"}
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}

@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlinSerialization)
-    id(libs.plugins.kotlinKapt.get().pluginId)
+    alias(libs.plugins.kotlinKsp)
 }
 
 android {
@@ -90,7 +90,7 @@ dependencies {
     implementation(libs.splashscreen)
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

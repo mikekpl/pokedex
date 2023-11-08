@@ -54,6 +54,7 @@ This project is built using next generation tools supported by the latest Canary
 * **Android Studio Iguana:** IDE used
 * **Kotlin:** Programming Language
 * **K2 Compiler:** In preparation for Kotlin 2.0
+* **KSP:** Uses KSP for hilt
 * **Jetpack Compose:** UI Toolkit
 * **Jetpack Libraries:** Lifecycle, View Model, Material 3, Navigation Compose etc.
 * **Hilt:** Dependency Injection
