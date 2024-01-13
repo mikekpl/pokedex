@@ -49,9 +49,9 @@ Each feature module is built with a sub-module that follows Domain, Data and UI
 
 ## Built With
 
-This project is built using next generation tools supported by the latest Canary version of **Android Studio Iguana | 2023.2.1 Canary 12:**. It is very important that your Kotlin, K2 Compiler, Jetpack Compose Compiler and Hilt versions aligned. In this case I used **(Kotlin 1.9.0, Jetpack Compose Compiler 1.5.0, Hilt 2.47+)**
+This project is built using next generation tools supported by the latest Canary version of **Android Studio Jellyfish | 2023.3.1 Canary 4:**. It is very important that your Kotlin, K2 Compiler, Jetpack Compose Compiler and Hilt versions aligned. In this case I used **(Kotlin 1.9.22, Jetpack Compose Compiler 1.5.8, Hilt 2.47+)**
 
-* **Android Studio Iguana:** IDE used
+* **Android Studio Jellyfish:** IDE used
 * **Kotlin:** Programming Language
 * **K2 Compiler:** In preparation for Kotlin 2.0
 * **KSP:** Uses KSP for hilt
