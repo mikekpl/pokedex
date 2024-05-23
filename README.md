@@ -44,6 +44,7 @@ Each feature module is built with a sub-module that follows Domain, Data and UI
 
 * **Coil Image Loading:** Attempt to load an image using Coil with or without loading animation
 * **CI/CD Using Github:** Utilizing Github Actions and Github Releases page for pipelines and deployment (uses debug apk but you can build release or sign as you like)
+* **R8:** Release and R8 ready, just make sure to generate your own keystore / signing capability
 * **Lib Versions Catalog:** Uses new lib.versions.toml versions catalog to manage dependencies and their versions
 
 ## Built With
