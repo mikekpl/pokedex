@@ -11,8 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
+      "minSdkVersionForDexing": 24,
       "versionCode": 1,
-      "versionName": "1.0",
+      "versionName": "1.0.0",
       "outputFile": "app-release.apk"
     }
   ],

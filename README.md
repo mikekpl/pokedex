@@ -1,6 +1,6 @@
 # Pokédex using Jetpack Compose
 
-A Pokémon list project that exhibits the next generation way for us to build our multi-module Android Applications using Jetpack Compose, Hilt, Clean Architecture, Kotlin Flow and more...
+A Pokémon list project that exhibits the next generation way for us to build our multi-module Android Applications using Kotlin 2.0.0, Jetpack Compose, Hilt, Clean Architecture, and more...
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/mike14u/pokedex/main/images/showcase.png" />
@@ -44,16 +44,15 @@ Each feature module is built with a sub-module that follows Domain, Data and UI
 
 * **Coil Image Loading:** Attempt to load an image using Coil with or without loading animation
 * **CI/CD Using Github:** Utilizing Github Actions and Github Releases page for pipelines and deployment (uses debug apk but you can build release or sign as you like)
-* **R8:** Release and R8 ready, just make sure to generate your own keystore / signing capability
 * **Lib Versions Catalog:** Uses new lib.versions.toml versions catalog to manage dependencies and their versions
 
 ## Built With
 
-This project is built using next generation tools supported by the latest Canary version of **Android Studio Jellyfish | 2023.3.1 Canary 4:**. It is very important that your Kotlin, K2 Compiler, Jetpack Compose Compiler and Hilt versions aligned. In this case I used **(Kotlin 1.9.22, Jetpack Compose Compiler 1.5.8, Hilt 2.47+)**
+This project is built using next generation tools supported by the latest Canary version of **Android Studio Koala Feature Drop | 2024.1.2 Canary 2:**. Kotlin 2.0.0 with Compose Compiler Gradle Ready!
 
-* **Android Studio Jellyfish:** IDE used
+* **Android Studio Koala:** IDE used
 * **Kotlin:** Programming Language
-* **K2 Compiler:** In preparation for Kotlin 2.0
+* **K2 Compiler:** Enabled
 * **KSP:** Uses KSP for hilt
 * **Jetpack Compose:** UI Toolkit
 * **Jetpack Libraries:** Lifecycle, View Model, Material 3, Navigation Compose etc.
