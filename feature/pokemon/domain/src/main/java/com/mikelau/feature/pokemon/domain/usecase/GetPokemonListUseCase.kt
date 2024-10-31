@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class GetPokemonListUseCase @Inject constructor(private val pokemonRepository: PokemonRepository) {
+open class GetPokemonListUseCase @Inject constructor(private val pokemonRepository: PokemonRepository) {
 
     operator fun invoke() = flow {
         emit(UiEvents.Loading())

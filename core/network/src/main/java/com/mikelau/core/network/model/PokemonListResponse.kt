@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PokemonListResponse(
-    @SerialName("results") val results: List<PokemonDto>
+    @SerialName("results") var results: List<PokemonDto>
 )

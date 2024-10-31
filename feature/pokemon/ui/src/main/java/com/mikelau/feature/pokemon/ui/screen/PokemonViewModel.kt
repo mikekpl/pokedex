@@ -18,7 +18,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PokemonViewModel @Inject constructor(private val getPokemonListUseCase: GetPokemonListUseCase) : ViewModel() {
+open class PokemonViewModel @Inject constructor(
+    private val getPokemonListUseCase: GetPokemonListUseCase
+) : ViewModel() {
 
     private val _pokemonList = mutableStateOf(PokemonStateHolder())
     val pokemonList: State<PokemonStateHolder> get() = _pokemonList
@@ -39,28 +41,34 @@ class PokemonViewModel @Inject constructor(private val getPokemonListUseCase: Ge
     }
 
     fun getPokemonList() = viewModelScope.launch {
-        getPokemonListUseCase().onEach {
-            when(it) {
-                is UiEvents.Loading -> {
-                    _pokemonList.value = PokemonStateHolder(isLoading = true)
-                }
-                is UiEvents.Error -> {
-                    _pokemonList.value = PokemonStateHolder(error = it.message.toString())
-                }
-                is UiEvents.Success -> {
-                    if (isNumeric(query.value)) {
-                        _pokemonList.value = PokemonStateHolder(data = it.data?.filter {
-                                filter -> filter.id.contains(_query.value)
-                        })
-                    } else if(_query.value.isNotBlank()) {
-                        _pokemonList.value = PokemonStateHolder(data = it.data?.filter {
-                                filter -> filter.name.contains(_query.value)
-                        })
-                    } else {
-                        _pokemonList.value = PokemonStateHolder(data = it.data)
+        if (getPokemonListUseCase != null) {
+            getPokemonListUseCase().onEach {
+                when (it) {
+                    is UiEvents.Loading -> {
+                        _pokemonList.value = PokemonStateHolder(isLoading = true)
+                    }
+
+                    is UiEvents.Error -> {
+                        _pokemonList.value = PokemonStateHolder(error = it.message.toString())
+                    }
+
+                    is UiEvents.Success -> {
+                        if (isNumeric(query.value)) {
+                            _pokemonList.value =
+                                PokemonStateHolder(data = it.data?.filter { filter ->
+                                    filter.id.contains(_query.value)
+                                })
+                        } else if (_query.value.isNotBlank()) {
+                            _pokemonList.value =
+                                PokemonStateHolder(data = it.data?.filter { filter ->
+                                    filter.name.contains(_query.value)
+                                })
+                        } else {
+                            _pokemonList.value = PokemonStateHolder(data = it.data)
+                        }
                     }
                 }
-            }
-        }.launchIn(viewModelScope)
+            }.launchIn(viewModelScope)
+        }
     }
 }
