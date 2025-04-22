@@ -1,6 +1,6 @@
 # Pokédex using Jetpack Compose
 
-A Pokémon list project that exhibits the next generation way for us to build our multi-module Android Applications using Kotlin 2.0.0, Jetpack Compose, Hilt, Clean Architecture, and more...
+A Pokémon list project that exhibits the next generation way for us to build our multi-module Android Applications using Kotlin 2.1.20, Jetpack Compose, Hilt, Clean Architecture, and more...
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/mike14u/pokedex/main/images/showcase.png" />
@@ -49,9 +49,9 @@ Each feature module is built with a sub-module that follows Domain, Data and UI
 
 ## Built With
 
-This project is built using next generation tools supported by the latest Canary version of **Android Studio Koala Feature Drop | 2024.1.2 Canary 2:**. Kotlin 2.0.0 with Compose Compiler Gradle Ready!
+This project is built using next generation tools supported by the latest Canary version of **Android Studio Narwhal | 2025.1.1 Canary 7:**. Kotlin 2.1.20 with Compose Compiler Gradle Ready!
 
-* **Android Studio Koala:** IDE used
+* **Android Studio Narwhal:** IDE used
 * **Kotlin:** Programming Language
 * **K2 Compiler:** Enabled
 * **KSP:** Uses KSP for hilt
@@ -60,7 +60,7 @@ This project is built using next generation tools supported by the latest Canary
 * **Hilt:** Dependency Injection
 * **Coil:** Image Loading
 * **Retrofit & OkHttp:** Networking and API management
-* **Kotlin Coroutines & Kotlin Flow:** Asynchrounous tasks and management
+* **Kotlin Coroutines & Kotlin Flow:** Asynchronous tasks and management
 
 ## Credits
 

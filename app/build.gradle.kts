@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
@@ -11,12 +10,12 @@ plugins {
 android {
 
     namespace = "com.mikelau.pokedex"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.mikelau.pokedex"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 2
         versionName = "2.0.0"
 
@@ -60,7 +59,6 @@ android {
 }
 
 composeCompiler {
-    enableStrongSkippingMode = true
     reportsDestination = layout.buildDirectory.dir("compose_compiler")
 }
 
