@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.material.icons.extended)
     implementation(libs.navigation.compose)
     implementation(libs.coil)
+    implementation(libs.coil.okhttp)
 
     implementation(libs.hilt.navigation.compose)
     implementation(libs.hilt)

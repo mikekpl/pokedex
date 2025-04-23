@@ -17,7 +17,7 @@ okhttp = "4.12.0"
 hilt = "2.56.2"
 navigation-compose = "2.8.9"
 hilt-navigation-compose = "1.2.0"
-coil = "2.7.0"
+coil = "3.1.0"
 material-icons-extended = "1.7.8"
 splashscreen = "1.0.1"
 kotlinx-serialization-json = "1.8.1"
@@ -50,7 +50,8 @@ hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt"}
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose"}
-coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil"}
+coil = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil"}
+coil-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil"}
 material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "material-icons-extended"}
 splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen"}
 accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist-systemuicontroller"}
