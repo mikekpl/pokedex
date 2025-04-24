@@ -20,13 +20,13 @@ android {
         versionName = if (project.hasProperty("versionName")) {
             project.property("versionName") as String
         } else {
-            "2.2.0"
+            "2.3.0"
         }
 
         versionCode = if (project.hasProperty("versionCode")) {
             (project.property("versionCode") as String).toInt()
         } else {
-            5
+            7
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
