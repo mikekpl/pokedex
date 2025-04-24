@@ -1,53 +1,76 @@
-name: main
-'on':
+name: Build and Upload APK
+
+on:
   push:
     tags:
-      - '*'
+      - 'v*'
+
+permissions:
+  contents: write
+
 jobs:
-  apk:
-    name: Generate APK
+  build:
+    name: Build Pokedex App
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2.4.0
-      - name: Setup JDK
-        uses: actions/setup-java@v2.5.0
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Extract versionName and versionCode from the tag
+      - name: Extract version info
+        id: extract_version
+        run: |
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          VERSION_NAME=$(echo $TAG_NAME | sed 's/^v//' | cut -d'-' -f1)
+          VERSION_CODE=$(echo $TAG_NAME | cut -d'-' -f2)
+          echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+          echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
+
+      # Set up JDK for Android
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
         with:
-          distribution: temurin
           java-version: '17'
-      - name: Set execution flag for gradlew
-        run: chmod +x gradlew
+          distribution: 'temurin'
+
+      # Set up Android SDK
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      # Build the APK with versionName and versionCode
       - name: Build APK
-        run: bash ./gradlew assembleDebug --stacktrace
-      - name: Upload APK
-        uses: actions/upload-artifact@v1
-        with:
-          name: apk
-          path: app/build/outputs/apk/debug/app-debug.apk
-  release:
-    name: Release APK
-    needs: apk
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download APK from build
-        uses: actions/download-artifact@v1
-        with:
-          name: apk
+        run: |
+          ./gradlew assembleDebug -PversionName=$VERSION_NAME -PversionCode=$VERSION_CODE
+
+      # Find the generated APK file
+      - name: Find APK
+        id: find_apk
+        run: |
+          APK_PATH=$(find app/build/outputs/apk -name "app-*.apk" | head -n 1)
+          echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
+          echo "APK_NAME=$(basename $APK_PATH)" >> $GITHUB_ENV
+
+      # Create a GitHub Release
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
         with:
           tag_name: ${{ github.ref_name }}
-          release_name: '${{ github.event.repository.name }} v${{ github.ref_name }}'
-      - name: Upload Release APK
-        id: upload_release_asset
-        uses: actions/upload-release-asset@v1.0.1
+          release_name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
         env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Upload APK to GitHub Release
+      - name: Upload APK to Release
+        uses: actions/upload-release-asset@v1
         with:
-          upload_url: '${{ steps.create_release.outputs.upload_url }}'
-          asset_path: apk/app-debug.apk
-          asset_name: '${{ github.event.repository.name }}.apk'
-          asset_content_type: application/zip
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ env.APK_PATH }}
+          asset_name: ${{ env.APK_NAME }}
+          asset_content_type: application/vnd.android.package-archive
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

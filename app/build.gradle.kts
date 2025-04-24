@@ -16,8 +16,18 @@ android {
         applicationId = "com.mikelau.pokedex"
         minSdk = 24
         targetSdk = 36
-        versionCode = 3
-        versionName = "2.1.0"
+
+        versionName = if (project.hasProperty("versionName")) {
+            project.property("versionName") as String
+        } else {
+            "2.2.0"
+        }
+
+        versionCode = if (project.hasProperty("versionCode")) {
+            (project.property("versionCode") as String).toInt()
+        } else {
+            5
+        }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

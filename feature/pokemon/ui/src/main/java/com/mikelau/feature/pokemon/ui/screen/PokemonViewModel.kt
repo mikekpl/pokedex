@@ -54,7 +54,7 @@ class PokemonViewModel @Inject constructor(private val getPokemonListUseCase: Ge
                         })
                     } else if(_query.value.isNotBlank()) {
                         _pokemonList.value = PokemonStateHolder(data = it.data?.filter {
-                                filter -> filter.name.contains(_query.value)
+                                filter -> filter.name.contains(_query.value.lowercase())
                         })
                     } else {
                         _pokemonList.value = PokemonStateHolder(data = it.data)
