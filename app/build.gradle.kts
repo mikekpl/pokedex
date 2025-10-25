@@ -20,13 +20,13 @@ android {
         versionName = if (project.hasProperty("versionName")) {
             project.property("versionName") as String
         } else {
-            "2.3.0"
+            "2.4.0"
         }
 
         versionCode = if (project.hasProperty("versionCode")) {
             (project.property("versionCode") as String).toInt()
         } else {
-            7
+            8
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -99,7 +99,6 @@ dependencies {
     implementation(libs.material.icons.extended)
     implementation(libs.navigation.compose)
     implementation(libs.splashscreen)
-    implementation(libs.accompanist.systemuicontroller)
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
     testImplementation(libs.junit)
