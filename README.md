@@ -1,6 +1,6 @@
 # Pokédex using Jetpack Compose
 
-A Pokémon list project that exhibits the next generation way for us to build our multi-module Android Applications using Kotlin 2.1.20, Jetpack Compose, Hilt, Clean Architecture, and more...
+A Pokémon list project that exhibits the next generation way for us to build our multi-module Android Applications using Kotlin 2.3.20, Jetpack Compose, Hilt, Clean Architecture, and more...
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/mike14u/pokedex/main/images/showcase.png" />
