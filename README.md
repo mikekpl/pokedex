@@ -42,6 +42,7 @@ Each feature module is built with a sub-module that follows Domain, Data and UI
 > Details page use:
 > pokedex://pokemon/{id} where id is the pokemon number
 
+* **Uses AGP 9!**
 * **Coil Image Loading:** Attempt to load an image using Coil with or without loading animation
 * **CI/CD Using Github:** Utilizing Github Actions and Github Releases page for pipelines and deployment (uses debug apk but you can build release or sign as you like)
 * **R8:** Release and R8 ready, just make sure to generate your own keystore / signing capability
@@ -49,14 +50,14 @@ Each feature module is built with a sub-module that follows Domain, Data and UI
 
 ## Built With
 
-This project is built using next generation tools supported by the latest Canary version of **Android Studio Narwhal | 2025.1.1 Canary 7:**. Kotlin 2.1.20 with Compose Compiler Gradle Ready!
+This project is built using next generation tools supported by the latest Canary version of **Android Studio Panda 4 | 2025.3.4 Canary 1:**. Kotlin 2.3.20 with Compose Compiler Gradle Ready!
 
-* **Android Studio Narwhal:** IDE used
+* **Android Studio Panda:** IDE used
 * **Kotlin:** Programming Language
 * **K2 Compiler:** Enabled
 * **KSP:** Uses KSP for hilt
 * **Jetpack Compose:** UI Toolkit
-* **Jetpack Libraries:** Lifecycle, View Model, Material 3, Navigation Compose etc.
+* **Jetpack Libraries:** Lifecycle, View Model, Material 3, Navigation 3 Compose etc.
 * **Hilt:** Dependency Injection
 * **Coil:** Image Loading
 * **Retrofit & OkHttp:** Networking and API management

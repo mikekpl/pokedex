@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -27,9 +28,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
     kotlin {
         jvmToolchain(17)
     }
@@ -39,7 +37,10 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
-    implementation(libs.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.nav3.runtime)
+    implementation(libs.nav3.ui)
+    implementation(libs.lifecycle.nav3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

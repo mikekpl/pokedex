@@ -1,8 +1,11 @@
+@file:Suppress("unused")
+
 package com.mikelau.pokedex.di
 
 import com.mikelau.feature.pokemon.ui.navigation.PokemonApi
+import com.mikelau.feature.pokemon.ui.navigation.PokemonApiImpl
 import com.mikelau.feature.pokemondetails.ui.navigation.PokemonDetailsApi
-import com.mikelau.pokedex.navigation.NavigationProvider
+import com.mikelau.feature.pokemondetails.ui.navigation.PokemonDetailsApiImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,9 +16,9 @@ import dagger.hilt.components.SingletonComponent
 object AppModule {
 
     @Provides
-    fun provideNavigationProvider(pokemonApi: PokemonApi, pokemonDetailsApi: PokemonDetailsApi): NavigationProvider {
-        return NavigationProvider(pokemonApi, pokemonDetailsApi)
-    }
+    fun providePokemonApi(): PokemonApi = PokemonApiImpl()
 
+    @Provides
+    fun providePokemonDetailsApi(): PokemonDetailsApi = PokemonDetailsApiImpl()
 }
 

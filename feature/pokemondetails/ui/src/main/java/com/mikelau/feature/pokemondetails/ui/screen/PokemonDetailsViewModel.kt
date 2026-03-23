@@ -2,7 +2,6 @@ package com.mikelau.feature.pokemondetails.ui.screen
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mikelau.core.common.UiEvents
@@ -15,19 +14,10 @@ import javax.inject.Inject
 @HiltViewModel
 class PokemonDetailsViewModel @Inject constructor(
     private val getPokemonDetailsUseCase: GetPokemonDetailsUseCase,
-    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _pokemonDetails = mutableStateOf(PokemonDetailsStateHolder())
     val pokemonDetails: State<PokemonDetailsStateHolder> get() = _pokemonDetails
-
-    init {
-        savedStateHandle.getLiveData<String>("id").observeForever {
-            it?.let {
-                getPokemonDetails(it)
-            }
-        }
-    }
 
     fun getPokemonDetails(id: String) {
         getPokemonDetailsUseCase(id).onEach {
@@ -35,7 +25,6 @@ class PokemonDetailsViewModel @Inject constructor(
                 is UiEvents.Loading -> {
                     _pokemonDetails.value = PokemonDetailsStateHolder(isLoading = true)
                 }
-
                 is UiEvents.Error -> {
                     _pokemonDetails.value = PokemonDetailsStateHolder(error = it.message.toString())
                 }

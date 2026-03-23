@@ -33,18 +33,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation3.runtime.NavBackStack
 import coil3.compose.AsyncImage
 import coil3.compose.SubcomposeAsyncImage
+import com.mikelau.core.AppNavDestination
 import com.mikelau.core.common.utils.ColorBackground
 import com.mikelau.core.common.utils.ColorIconSearchBackground
 import com.mikelau.core.common.utils.ColorIconSearchBorder
@@ -59,9 +60,8 @@ import com.mikelau.core.common.utils.getPokemonImage
 import com.mikelau.core.common.utils.isNumeric
 import com.mikelau.core.common.utils.titleCase
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun PokemonScreen(viewModel: PokemonViewModel, navController: NavController) {
+fun PokemonScreen(viewModel: PokemonViewModel, backStack: NavBackStack<AppNavDestination>) {
 
     val result = viewModel.pokemonList.value
     val query = viewModel.query.collectAsState()
@@ -135,14 +135,14 @@ fun PokemonScreen(viewModel: PokemonViewModel, navController: NavController) {
                             .padding(start = 16.dp, top = 4.dp, bottom = 4.dp)
                             .clickable {
                                 if (isNumeric(query.value)) {
-                                    navController.navigate("pokemon_details/${query.value}")
+                                    backStack.add(AppNavDestination.PokemonDetails(id = query.value))
                                 } else if (query.value.isBlank()) {
-                                    navController.navigate("pokemon_details/${0}")
+                                    backStack.add(AppNavDestination.PokemonDetails(id = "0"))
                                 } else {
                                     val pokemonNumber =
                                         result.data?.indexOfFirst { it.name == query.value } ?: 0
-                                    val queryPokemonNumber = pokemonNumber + 1
-                                    navController.navigate("pokemon_details/${queryPokemonNumber}")
+                                    val queryPokemonNumber = (pokemonNumber + 1).toString()
+                                    backStack.add(AppNavDestination.PokemonDetails(id = queryPokemonNumber))
                                 }
                             },
                         shape = RoundedCornerShape(12.dp)
@@ -245,7 +245,7 @@ fun PokemonScreen(viewModel: PokemonViewModel, navController: NavController) {
                                     .height(212.dp)
                                     .padding(8.dp)
                                     .clickable {
-                                        navController.navigate("pokemon_details/${pokemonNumber}")
+                                        backStack.add(AppNavDestination.PokemonDetails(id = pokemonNumber))
                                     },
                                 shape = RoundedCornerShape(16.dp),
                             ) {
@@ -264,7 +264,8 @@ fun PokemonScreen(viewModel: PokemonViewModel, navController: NavController) {
                                                 end = 20.dp
                                             )
                                             .fillMaxWidth()
-                                            .height(130.dp),
+                                            .height(130.dp)
+                                            .clip(RoundedCornerShape(12.dp)),
                                         alignment = Alignment.Center,
                                         model = getPokemonImage(pokemonNumber),
                                         contentDescription = null,

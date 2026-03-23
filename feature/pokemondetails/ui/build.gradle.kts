@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlinKsp)
     alias(libs.plugins.compose.compiler)
@@ -29,9 +28,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
     }
     kotlin {
         jvmToolchain(17)
@@ -64,9 +60,12 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
     implementation(libs.material.icons.extended)
-    implementation(libs.navigation.compose)
     implementation(libs.coil)
     implementation(libs.coil.okhttp)
+
+    implementation(libs.nav3.runtime)
+    implementation(libs.nav3.ui)
+    implementation(libs.lifecycle.nav3)
 
     implementation(libs.hilt.navigation.compose)
     implementation(libs.hilt)

@@ -13,34 +13,26 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.mikelau.core.common.utils.ColorBackground
 import com.mikelau.pokedex.navigation.AppNavGraph
-import com.mikelau.pokedex.navigation.NavigationProvider
+import com.mikelau.pokedex.navigation.rememberAppNavBackStack
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var navigationProvider: NavigationProvider
-
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-
         enableEdgeToEdge()
         setContent {
-            val navController = rememberNavController()
-            App(navHostController = navController, navigationProvider)
+            App()
         }
     }
 }
 
 @Composable
-fun App(navHostController: NavHostController, navigationProvider: NavigationProvider) {
+fun App() {
     Surface(
         modifier = Modifier
             .background(ColorBackground)
@@ -48,6 +40,7 @@ fun App(navHostController: NavHostController, navigationProvider: NavigationProv
             .windowInsetsPadding(WindowInsets.systemBars),
         color = ColorBackground
     ) {
-        AppNavGraph(navController = navHostController, navigationProvider = navigationProvider)
+        val backStack = rememberAppNavBackStack()
+        AppNavGraph(backStack = backStack)
     }
 }

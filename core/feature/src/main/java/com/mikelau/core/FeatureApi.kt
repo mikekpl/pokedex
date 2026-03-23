@@ -1,13 +1,8 @@
 package com.mikelau.core
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 
-interface FeatureApi {
-
-    fun registerGraph(
-        navController: NavHostController,
-        navGraphBuilder: NavGraphBuilder
-    )
-
+fun interface FeatureApi {
+    fun registerGraph(backStack: NavBackStack<NavKey>)
 }
