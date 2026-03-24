@@ -13,7 +13,7 @@ This project will be helpful for many things both Pokémon and Tech, building wi
 <img src="https://raw.githubusercontent.com/mike14u/pokedex/main/images/gif.gif" height="800" />
 
 ### Pokédex Features
-* **List of Pokémon:** #1010 as of the moment since the 5 others are newly released no further info is provided
+* **List of Pokémon:** #1025 Official Species and all the other variants including regional variants, mega evolutions and gigantamax forms
 * **Shiny Pokémon Image:** Get to see what their shiny form looks like in the details page
 * **Search Pokémon:** Either search by their name or number
 * **Responsive Layout:** Supports both portrait and landscape orientation

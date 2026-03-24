@@ -10,7 +10,7 @@ interface ApiService {
     // https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1010
     // https://pokeapi.co/api/v2/pokemon/1
     // #1010 Official Count of Pokemon as of 07-28-2023
-    @GET("pokemon/?offset=0&limit=1010")
+    @GET("pokemon/?offset=0&limit=2000")
     suspend fun getPokemonList(): PokemonListResponse
 
     @GET("pokemon/{id}")
