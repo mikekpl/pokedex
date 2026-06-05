@@ -1,0 +1,35 @@
+package com.mikelau.feature.pokemondetails.ui.screen
+
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.mikelau.core.common.UiEvents
+import com.mikelau.feature.pokemondetails.domain.usecase.GetPokemonDetailsUseCase
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+
+class PokemonDetailsViewModel(
+    private val getPokemonDetailsUseCase: GetPokemonDetailsUseCase,
+) : ViewModel() {
+
+    private val _pokemonDetails = mutableStateOf(PokemonDetailsStateHolder())
+    val pokemonDetails: State<PokemonDetailsStateHolder> get() = _pokemonDetails
+
+    fun getPokemonDetails(id: String) {
+        getPokemonDetailsUseCase(id).onEach {
+            when (it) {
+                is UiEvents.Loading -> {
+                    _pokemonDetails.value = PokemonDetailsStateHolder(isLoading = true)
+                }
+                is UiEvents.Error -> {
+                    _pokemonDetails.value = PokemonDetailsStateHolder(error = it.message.toString())
+                }
+
+                is UiEvents.Success -> {
+                    _pokemonDetails.value = PokemonDetailsStateHolder(data = it.data)
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+}

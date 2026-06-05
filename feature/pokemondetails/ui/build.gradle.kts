@@ -1,84 +1,59 @@
 plugins {
+    alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlinKsp)
+    alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.compose.compiler)
+}
+
+kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
+    }
+    
+    listOf(
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "feature-pokemondetails-ui"
+            isStatic = true
+        }
+    }
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(project(":feature:pokemondetails:domain"))
+            implementation(project(":core:feature"))
+            implementation(project(":core:common"))
+
+            implementation(libs.compose.runtime)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.material3)
+            implementation(libs.compose.ui)
+            implementation(libs.compose.components.resources)
+            implementation(libs.compose.uiToolingPreview)
+            
+            implementation(libs.coil)
+            implementation(libs.coil.svg)
+            implementation(libs.coil.network.ktor)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+        }
+    }
 }
 
 android {
     namespace = "com.mikelau.feature.pokemon_details.ui"
     compileSdk = 36
-
     defaultConfig {
         minSdk = 24
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    buildFeatures {
-        compose = true
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
     }
 }
 
-kotlin {
-    jvmToolchain(17)
+compose.resources {
+    packageOfResClass = "com.mikelau.feature.pokemondetails.ui.res"
 }
 
-
-composeCompiler {
-    reportsDestination = layout.buildDirectory.dir("compose_compiler")
-}
-
-dependencies {
-    implementation(project(":feature:pokemondetails:domain"))
-    implementation(project(":core:feature"))
-    implementation(project(":core:common"))
-
-    implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.activity.compose)
-    implementation(platform(libs.compose.bom))
-    implementation(libs.ui)
-    implementation(libs.ui.graphics)
-    implementation(libs.ui.tooling.preview)
-    implementation(libs.material3)
-    implementation(libs.material.icons.extended)
-    implementation(libs.coil)
-    implementation(libs.coil.okhttp)
-
-    implementation(libs.nav3.runtime)
-    implementation(libs.nav3.ui)
-    implementation(libs.lifecycle.nav3)
-
-    implementation(libs.hilt.navigation.compose)
-    implementation(libs.hilt)
-    ksp(libs.hilt.compiler)
-
-    androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-}
