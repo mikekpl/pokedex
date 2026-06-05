@@ -6,22 +6,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil3.ImageLoader
 import coil3.compose.setSingletonImageLoaderFactory
 import coil3.svg.SvgDecoder
+import com.mikelau.pokedex.di.appModule
 import com.mikelau.pokedex.navigation.AppNavGraph
+import org.koin.compose.KoinApplication
+import org.koin.dsl.koinConfiguration
 
 @Composable
 @Preview
 fun App() {
-    setSingletonImageLoaderFactory { context ->
-        ImageLoader.Builder(context)
-            .components {
-                add(SvgDecoder.Factory())
-            }
-            .build()
-    }
-    MaterialTheme {
-        AppNavGraph()
+    KoinApplication(koinConfiguration {
+        modules(appModule)
+    }) {
+        setSingletonImageLoaderFactory { context ->
+            ImageLoader.Builder(context)
+                .components {
+                    add(SvgDecoder.Factory())
+                }
+                .build()
+        }
+        MaterialTheme {
+            AppNavGraph()
+        }
     }
 }
-
-
-

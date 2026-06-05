@@ -1,8 +1,9 @@
 package com.mikelau.pokedex.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.mikelau.core.AppNavDestination
 import com.mikelau.feature.pokemon.ui.screen.PokemonScreen
@@ -13,7 +14,9 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun AppNavGraph() {
-    val backStack = rememberNavBackStack(AppNavDestination.PokemonList)
+    val backStack = remember {
+        mutableStateListOf<AppNavDestination>(AppNavDestination.PokemonList)
+    }
 
     NavDisplay(
         backStack = backStack,
@@ -43,6 +46,8 @@ fun AppNavGraph() {
         }
     )
 }
+
+
 
 
 
