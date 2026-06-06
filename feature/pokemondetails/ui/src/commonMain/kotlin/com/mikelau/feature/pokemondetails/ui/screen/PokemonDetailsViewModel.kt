@@ -12,22 +12,20 @@ import kotlinx.coroutines.flow.onEach
 class PokemonDetailsViewModel(
     private val getPokemonDetailsUseCase: GetPokemonDetailsUseCase,
 ) : ViewModel() {
-
-    private val _pokemonDetails = mutableStateOf(PokemonDetailsStateHolder())
-    val pokemonDetails: State<PokemonDetailsStateHolder> get() = _pokemonDetails
+    val pokemonDetails: State<PokemonDetailsStateHolder>
+        field = mutableStateOf(PokemonDetailsStateHolder())
 
     fun getPokemonDetails(id: String) {
         getPokemonDetailsUseCase(id).onEach {
             when (it) {
                 is UiEvents.Loading -> {
-                    _pokemonDetails.value = PokemonDetailsStateHolder(isLoading = true)
+                    pokemonDetails.value = PokemonDetailsStateHolder(isLoading = true)
                 }
                 is UiEvents.Error -> {
-                    _pokemonDetails.value = PokemonDetailsStateHolder(error = it.message.toString())
+                    pokemonDetails.value = PokemonDetailsStateHolder(error = it.message.toString())
                 }
-
                 is UiEvents.Success -> {
-                    _pokemonDetails.value = PokemonDetailsStateHolder(data = it.data)
+                    pokemonDetails.value = PokemonDetailsStateHolder(data = it.data)
                 }
             }
         }.launchIn(viewModelScope)

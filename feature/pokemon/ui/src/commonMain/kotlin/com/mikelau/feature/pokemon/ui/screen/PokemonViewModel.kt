@@ -17,44 +17,44 @@ import kotlinx.coroutines.launch
 
 class PokemonViewModel(private val getPokemonListUseCase: GetPokemonListUseCase) : ViewModel() {
 
-    private val _pokemonList = mutableStateOf(PokemonStateHolder())
-    val pokemonList: State<PokemonStateHolder> get() = _pokemonList
+    val pokemonList: State<PokemonStateHolder>
+        field = mutableStateOf(PokemonStateHolder())
 
-    private val _query: MutableStateFlow<String> = MutableStateFlow("")
-    val query: StateFlow<String> get() = _query
+    val query: StateFlow<String>
+        field: MutableStateFlow<String> = MutableStateFlow("")
 
     init {
         viewModelScope.launch {
-            _query.debounce(100).collectLatest {
+            query.debounce(100).collectLatest {
                 getPokemonList()
             }
         }
     }
 
     fun setQuery(s: String) {
-        _query.value = s
+        query.value = s
     }
 
     fun getPokemonList() = viewModelScope.launch {
         getPokemonListUseCase().onEach {
-            when(it) {
+            when (it) {
                 is UiEvents.Loading -> {
-                    _pokemonList.value = PokemonStateHolder(isLoading = true)
+                    pokemonList.value = PokemonStateHolder(isLoading = true)
                 }
                 is UiEvents.Error -> {
-                    _pokemonList.value = PokemonStateHolder(error = it.message.toString())
+                    pokemonList.value = PokemonStateHolder(error = it.message.toString())
                 }
                 is UiEvents.Success -> {
                     if (isNumeric(query.value)) {
-                        _pokemonList.value = PokemonStateHolder(data = it.data?.filter {
-                                filter -> filter.id.contains(_query.value)
+                        pokemonList.value = PokemonStateHolder(data = it.data?.filter {
+                                filter -> filter.id.contains(query.value)
                         })
-                    } else if(_query.value.isNotBlank()) {
-                        _pokemonList.value = PokemonStateHolder(data = it.data?.filter {
-                                filter -> filter.name.contains(_query.value.lowercase())
+                    } else if (query.value.isNotBlank()) {
+                        pokemonList.value = PokemonStateHolder(data = it.data?.filter {
+                                filter -> filter.name.contains(query.value.lowercase())
                         })
                     } else {
-                        _pokemonList.value = PokemonStateHolder(data = it.data)
+                        pokemonList.value = PokemonStateHolder(data = it.data)
                     }
                 }
             }

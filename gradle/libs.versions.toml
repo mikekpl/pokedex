@@ -1,13 +1,13 @@
 [versions]
 agp = "9.2.1"
-kotlin = "2.3.21"
+kotlin = "2.4.0"
 composeMultiplatform = "1.11.1"
 koin = "4.2.1"
 ktor = "3.5.0"
 coil = "3.4.0"
 material3 = "1.11.0-alpha07"
 kotlinx-serialization-json = "1.11.0"
-kotlin-plugin-serialization = "2.3.21"
+kotlin-plugin-serialization = "2.4.0"
 kotlinx-coroutines = "1.11.0"
 nav3-core = "1.1.1"
 

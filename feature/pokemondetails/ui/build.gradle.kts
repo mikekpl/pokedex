@@ -43,6 +43,10 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
         }
     }
+
+    compilerOptions {
+        freeCompilerArgs.add("-Xexplicit-backing-fields")
+    }
 }
 
 android {
@@ -56,4 +60,3 @@ android {
 compose.resources {
     packageOfResClass = "com.mikelau.feature.pokemondetails.ui.res"
 }
-

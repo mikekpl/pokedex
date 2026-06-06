@@ -43,6 +43,10 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
         }
     }
+
+    compilerOptions {
+        freeCompilerArgs.add("-Xexplicit-backing-fields")
+    }
 }
 
 android {
