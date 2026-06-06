@@ -45,7 +45,7 @@ Each feature module is built with sub-modules following Domain, Data and UI
 
 ## Built With
 
-Built with **Android Studio Quail 1 | 2026.1.1** and **Xcode** for iOS. Kotlin 2.3.21 with Compose Compiler Gradle plugin.
+Built with **Android Studio Quail 1 | 2026.1.1** and **Xcode** for iOS. Kotlin 2.4.0 with Compose Compiler Gradle plugin.
 
 * **Android Studio Quail / Xcode:** IDEs used
 * **Kotlin Multiplatform:** Shared code across Android and iOS
@@ -56,6 +56,7 @@ Built with **Android Studio Quail 1 | 2026.1.1** and **Xcode** for iOS. Kotlin 2
 * **Ktor 3.x:** Multiplatform HTTP client (OkHttp engine on Android, Darwin engine on iOS)
 * **Coil 3.x:** Multiplatform image loading with SVG support
 * **Kotlin Coroutines & Flow:** Asynchronous tasks — `Dispatchers.IO` available on all KMP targets (coroutines 1.10+)
+* **Explicit backing fields** usage in ViewModels
 
 ## Project Structure
 
