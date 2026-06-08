@@ -29,10 +29,10 @@ jobs:
           echo "VERSION_CODE=$VERSION_CODE" >> $GITHUB_ENV
 
       # Set up JDK for Android
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
 
       # Set up Android SDK
@@ -42,13 +42,13 @@ jobs:
       # Build the APK with versionName and versionCode
       - name: Build APK
         run: |
-          ./gradlew assembleDebug -PversionName=$VERSION_NAME -PversionCode=$VERSION_CODE
+          ./gradlew :androidApp:assembleDebug -PversionName=$VERSION_NAME -PversionCode=$VERSION_CODE
 
       # Find the generated APK file
       - name: Find APK
         id: find_apk
         run: |
-          APK_PATH=$(find composeApp/build/outputs/apk -name "*.apk" | head -n 1)
+          APK_PATH=$(find androidApp/build/outputs/apk -name "*.apk" | head -n 1)
           echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
           echo "APK_NAME=$(basename $APK_PATH)" >> $GITHUB_ENV
 
