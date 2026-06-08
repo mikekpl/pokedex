@@ -15,8 +15,22 @@ android {
         versionName = "1.0"
     }
     buildTypes {
+        register("staging") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("debug")
+        }
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -39,4 +53,3 @@ dependencies {
     implementation(libs.compose.uiToolingPreview)
     implementation(libs.koin.android)
 }
-
