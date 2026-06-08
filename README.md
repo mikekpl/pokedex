@@ -20,13 +20,40 @@ This project demonstrates building a production-ready KMP application with a mul
 * **Android OS Support:** Android 7.0 (API Level 24) and above
 * **iOS Support:** iOS 16.0 and above (iosArm64 + iosSimulatorArm64)
 
-### Tech Features
-<img src="https://raw.githubusercontent.com/mike14u/pokedex/main/images/directory.png" />
+### Tech Features / Project Structure
+
+```
+shared/              ← KMP shared library (Android + iOS)
+  commonMain/        ← Shared App.kt, navigation, DI modules
+  iosMain/           ← MainViewController
+
+androidApp/          ← Android application entry point
+  src/main/          ← MainActivity, BaseApplication, resources
+
+core/
+  common/            ← Shared UI utilities, colors, UiEvents
+  feature/           ← FeatureApi, AppNavDestination (NavKey)
+  network/           ← Ktor HttpClient, ApiService, NetworkModule
+
+feature/
+  pokemon/
+    data/            ← Repository impl, mappers
+    domain/          ← Use cases, repository interface, Koin module
+    ui/              ← ViewModel, Screens, Koin module, SVG resources
+  pokemondetails/
+    data/            ← Repository impl, mappers
+    domain/          ← Use cases, repository interface, Koin module
+    ui/              ← ViewModel, Screens, Koin module, SVG resources
+
+iosApp/              ← Xcode project (Swift entry point)
+```
 
 * **Kotlin Multiplatform (KMP):** Fully multiplatform — shared business logic, networking, DI, and UI across Android and iOS
 * **Compose Multiplatform:** Single shared Compose UI codebase targeting both platforms
+* **New KMP Default Structure:** Separate `shared` library module and `androidApp` entry point module, compatible with AGP 9.0+
 * **Multi-module:** Feature and layer modules (domain, data, ui) per feature for team scalability and build time improvements
 * **Clean Architecture:** Domain → Data → UI separation per feature module
+* **Android App Obfuscation** Obfuscated android app using R8, use staging build variant
 
 <p align="center">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPxJYFYDDFI8-kdeuQrCEkocLizXyUhbsTyQ" width="400"/>
@@ -57,32 +84,6 @@ Built with **Android Studio Quail 1 | 2026.1.1** and **Xcode** for iOS. Kotlin 2
 * **Coil 3.x:** Multiplatform image loading with SVG support
 * **Kotlin Coroutines & Flow:** Asynchronous tasks — `Dispatchers.IO` available on all KMP targets (coroutines 1.10+)
 * **Explicit backing fields** usage in ViewModels
-
-## Project Structure
-
-```
-composeApp/          ← App entry point (Android + iOS)
-  androidMain/       ← MainActivity, BaseApplication
-  commonMain/        ← Shared App.kt, navigation, DI modules
-  iosMain/           ← MainViewController
-
-core/
-  common/            ← Shared UI utilities, colors, UiEvents
-  feature/           ← FeatureApi, AppNavDestination (NavKey)
-  network/           ← Ktor HttpClient, ApiService, NetworkModule
-
-feature/
-  pokemon/
-    data/            ← Repository impl, mappers
-    domain/          ← Use cases, repository interface, Koin module
-    ui/              ← ViewModel, Screens, Koin module, SVG resources
-  pokemondetails/
-    data/            ← Repository impl, mappers
-    domain/          ← Use cases, repository interface, Koin module
-    ui/              ← ViewModel, Screens, Koin module, SVG resources
-
-iosApp/              ← Xcode project (Swift entry point)
-```
 
 ## Credits
 
